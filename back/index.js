@@ -8,7 +8,7 @@ const port = 3001
 function getArchetypeCards(archetype) {
   const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=${encodeURIComponent(archetype)}`;
 
-  return axios.get(url) // Retourner la Promesse
+  return axios.get(url)
     .then(response => {
       return response.data;
     })
@@ -19,7 +19,8 @@ function getArchetypeCards(archetype) {
 
 app.get('/archetype/:name', async (req, res) => { 
   try {
-    const archetypeCards = await getArchetypeCards(req.params.name) 
+    const cardInfo = await getArchetypeCards(req.params.name) 
+    res.send(cardInfo)
   } catch (error) {
     res.status(500).send({ error: 'An error occurred' })
   }
@@ -37,14 +38,15 @@ function getCardInfo(name) {
     });
 }
 
-app.get('/', async (req, res) => { 
+app.get('/name/:name', async (req, res) => { 
   try {
-    const cardInfo = await getCardInfo('Dark Magician') 
-    res.send(cardInfo)
+    const archetypeCards = await getCardInfo(req.params.name)
+    res.send(archetypeCards) 
   } catch (error) {
     res.status(500).send({ error: 'An error occurred' })
   }
 })
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
