@@ -3,17 +3,16 @@ const axios = require('axios')
 const app = express()
 const port = 3001
 
-function getXCards(number) {
+async function getXCards(number) {
   const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php`;
-
 
   return axios.get(url)
     .then(response => {
-      const cards = response.data.slice(0, number).map(card => ({
+      const cards = response.data.data.slice(0, number).map(card => ({
         id: card.id,
         name: card.name,
-        imageCropped: card.card_images.image_url_cropped
-      }));;
+        imageCropped: card.card_images[0].image_url_cropped
+      }));
       return cards;
     })
     .catch(error => {
@@ -21,7 +20,7 @@ function getXCards(number) {
     });
 }
 
-function getArchetypeCards(archetype) {
+async function getArchetypeCards(archetype) {
   const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=${encodeURIComponent(archetype)}`;
 
   return axios.get(url)
@@ -42,7 +41,7 @@ app.get('/archetype/:name', async (req, res) => {
   }
 })
 
-function getCardInfo(name) {
+async function getCardInfo(name) {
   const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${encodeURIComponent(name)}`;
 
   return axios.get(url)
@@ -70,7 +69,7 @@ app.get('/limit/:number', async (req, res) => {
   } catch (error) {
     res.status(500).send({ error: 'An error occurred' })
   }
-})
+}) 
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
