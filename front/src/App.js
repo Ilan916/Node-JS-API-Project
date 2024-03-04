@@ -23,7 +23,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/card/:id" element={<Detail />} />
         <Route path="/formadd" element={<FormAdd />} />
         <Route path="/formemail" element={<FormEmail />} />
       </Routes>

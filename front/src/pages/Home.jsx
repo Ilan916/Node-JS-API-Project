@@ -1,8 +1,12 @@
 import React from 'react'
+import ListCard from '../components/ListCard'
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      Home
+      <ListCard />
+    </div>
   )
 }
 
