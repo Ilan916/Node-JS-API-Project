@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express')
 const axios = require('axios')
 const app = express()
@@ -62,7 +63,7 @@ app.get('/name/:name', async (req, res) => {
   }
 })
 
-app.get('/limit/:number', async (req, res) => { 
+app.get('/limit', async (req, res) => { 
   try {
     const listCards = await getXCards(req.params.number)
     res.send(listCards) 
