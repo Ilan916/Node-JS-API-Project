@@ -1,4 +1,4 @@
-import { Home, Detail, FormAdd, FormEmail, ListCartes }  from './pages'
+import { Home, Detail, FormAdd, FormEmail }  from './pages'
 import { Navbar } from './components'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -12,7 +12,6 @@ function App() {
           <Route path="/card/:id" element={<Detail />} />
           <Route path="/formadd" element={<FormAdd />} />
           <Route path="/formemail" element={<FormEmail />} />
-          <Route path="/list-cartes" element={<ListCartes />} />
         </Routes>
       </Router>
     </div>
