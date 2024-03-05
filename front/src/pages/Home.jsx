@@ -1,12 +1,11 @@
 import React from 'react'
-import ListCard from '../components/ListCard'
+import { ListCardOne } from '../components';
 
 function Home() {
   return (
-    <div>
-      Home
-      <ListCard />
-    </div>
+    <>
+      <ListCardOne />
+    </>
   )
 }
 

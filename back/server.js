@@ -16,7 +16,8 @@ function getXCards() {
         id: card.id,
         name: card.name,
         imageUrl: card.card_images[0].image_url,
-        imageCroppedUrl: card.card_images[0].image_url_cropped
+        imageCroppedUrl: card.card_images[0].image_url_cropped,
+        ArcheType: card.type
       }));
       return cards;
     })
@@ -24,12 +25,14 @@ function getXCards() {
       console.error(error);
       throw error; // Propager l'erreur pour la gérer plus haut
     });
+   
 }
 
 app.get('/cards', async (req, res) => {
   try {
     const cards = await getXCards(); // Pas besoin de passer un nombre ici, car on veut toujours les 20 premières cartes
-    res.json(cards); // Envoie les cartes récupérées au client
+    res.json(cards);
+     // Envoie les cartes récupérées au client
   } catch (error) {
     console.error(error); // Log l'erreur sur le serveur
     res.status(500).send({ error: 'An error occurred while fetching the cards' });
